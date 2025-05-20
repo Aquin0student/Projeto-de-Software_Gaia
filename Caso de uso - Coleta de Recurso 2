@@ -1,0 +1,19 @@
+@startuml
+actor Jogador
+actor Administrador
+
+Jogador --> (Coletar Recurso)
+Jogador --> (Vender Recurso)
+Jogador --> (Construir Item)
+
+(Coletar Recurso) --> (Verificar Oferta e Procura) : <<include>>
+(Vender Recurso) --> (Verificar Oferta e Procura) : <<include>>
+(Vender item) --> (Verificar Oferta e Procura) : <<include>>
+
+(Construir Item) --> (Equipar item) : <<extend>>
+(Construir Item) --> (Vender item) : <<extend>>
+
+Administrador --> (Verificar Oferta e Procura)
+
+(Verificar Oferta e Procura) --> (Atualizar Lista de Interesse global)
+@enduml
