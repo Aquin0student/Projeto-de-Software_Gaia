@@ -1,0 +1,13 @@
+@startuml
+actor Jogador
+
+Jogador --> (Apresentar item para o NPC)
+Jogador --> (Comprar item no mercado)
+Jogador --> (Colocar item no mercado)
+
+(Colocar item no mercado) --> (Atualizar oferta e procura) : <<include>>
+(Comprar item no mercado) --> (Atualizar oferta e procura) : <<include>>
+(Apresentar item para o NPC) --> (Atualizar oferta e procura) : <<include>>
+
+(Atualizar oferta e procura) --> (Avaliar valor do item)
+@enduml
