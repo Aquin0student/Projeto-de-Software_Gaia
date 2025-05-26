@@ -1,0 +1,20 @@
+@startuml
+actor Sistema
+actor NPC
+actor Jogador
+
+Jogador --> (Selecionar missão)
+Sistema --> (Verificar Disponibilidade de Recursos)
+
+NPC --> (Solicitar Recurso - Missao)
+NPC --> (Coletar Recurso)
+(Coletar Recurso) --> (Vender Recurso)
+
+(Verificar Disponibilidade de Recursos) --> (Ajustar Disponibilidade de Recursos)
+(Ajustar Disponibilidade de Recursos) --> (Ajustar Raridade) : <<include>>
+(Ajustar Disponibilidade de Recursos) --> (Ajustar Padrão Comportamental de NPCs) : <<extend>>
+(Coletar Recurso) --> (Verificar Disponibilidade de Recursos) : <<include>>
+
+
+
+@enduml
