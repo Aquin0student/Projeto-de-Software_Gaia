@@ -1,0 +1,45 @@
+@startuml
+NPC -> Jogador : Solicitação de Missão
+activate Jogador
+note right of Jogador: Executando a Missão
+Jogador --> NPC :  Concluir Missão
+
+opt Precisa de outro recurso acessível
+  NPC -> NPC : Coletar Recurso do Mundo
+  activate NPC
+  note right of NPC: Recolhendo
+  deactivate NPC
+end
+
+deactivate Jogador
+
+group Envio de item para a IA
+  NPC -> IA : Solicitar venda de item
+  activate IA
+  note right of IA: Pesquisando Oferta e Procura
+
+  IA --> NPC : Retornar Valor do item
+  
+deactivate IA
+end
+
+group Venda de Itens
+  NPC -> Jogador : Vender Item
+  activate Jogador
+
+  Jogador --> NPC : Enviar Moeda
+  deactivate Jogador
+
+  NPC -> IA : Enviar dados da Venda
+  activate IA
+  note right of IA: Atualizando oferta e Procura
+  
+  IA ->> NPC : Retonar valor atualizado
+  deactivate IA
+end
+
+IA -> IA : Atualizar Disponibilidade de Itens
+activate IA
+deactivate IA
+
+@enduml 
