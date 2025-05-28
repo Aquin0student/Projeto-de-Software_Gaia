@@ -1,0 +1,16 @@
+
+@startuml
+package "Gaia - IA de Controle" {
+
+  [Interface do Jogador] --> [Controlador da IA] : ações do jogador
+
+  [Controlador da IA] --> [Gerenciador de Recursos] : dados coletados
+  [Controlador da IA] --> [Módulo de Missões e Criaturas] : gerar criaturas/missões
+  [Controlador da IA] --> [Persistência de Dados] : grava/consulta dados
+
+  [Gerenciador de Recursos] --> [Persistência de Dados] : atualiza recursos
+  [Módulo de Missões e Criaturas] --> [Persistência de Dados] : consulta criaturas/missões
+
+}
+
+@enduml
