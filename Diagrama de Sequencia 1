@@ -2,14 +2,21 @@
 NPC -> Jogador : Solicitação de Missão
 activate Jogador
 note right of Jogador: Executando a Missão
-Jogador --> NPC :  Concluir Missão
+
 
 opt Precisa de outro recurso acessível
-  NPC -> NPC : Coletar Recurso do Mundo
-  activate NPC
-  note right of NPC: Recolhendo
-  deactivate NPC
+  NPC -> Mundo : Coletar Recurso do Mundo
+  activate Mundo
+  Mundo --> NPC : Retornar Recurso
+  Mundo -> IA : Enviar Coleta de Recurso
+  IA -> IA : Avaliar Coleta
+  activate IA
+  IA --> Mundo : Retornar decisão sobre o recurso
+  deactivate IA
+  deactivate Mundo
 end
+
+Jogador --> NPC :  Concluir Missão
 
 deactivate Jogador
 
@@ -34,12 +41,13 @@ group Venda de Itens
   activate IA
   note right of IA: Atualizando oferta e Procura
   
-  IA ->> NPC : Retonar valor atualizado
+  IA --> NPC : Retonar valor atualizado
   deactivate IA
 end
 
-IA -> IA : Atualizar Disponibilidade de Itens
+IA -> IA : Atualizar Raridade de Itens
 activate IA
+IA --> Mundo : Enviar nova raridade
 deactivate IA
 
 @enduml 
