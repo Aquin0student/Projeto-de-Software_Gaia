@@ -1,4 +1,4 @@
-startuml
+@startuml
 NPC -> Jogador : Solicitação de Missão
 activate Jogador
 note right of Jogador: Executando a Missão
