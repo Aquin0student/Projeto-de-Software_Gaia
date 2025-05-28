@@ -1,0 +1,22 @@
+@startuml
+node "Jogador (Cliente)" {
+    artifact "Interface do Jogo"
+}
+
+node "Servidor Gaia" {
+    artifact "IA de Controle"
+    artifact "Gerenciador de Recursos"
+    artifact "Módulo de Missões e Criaturas"
+}
+
+node "Banco de Dados" {
+    database "BD Gaia"
+}
+
+"Interface do Jogo" --> "IA de Controle" : Envia ações do jogador
+"IA de Controle" --> "Gerenciador de Recursos" : Solicita atualização de mundo
+"Gerenciador de Recursos" --> "Módulo de Missões e Criaturas" : Atualiza criaturas/missões
+"IA de Controle" --> "BD Gaia" : Consulta e grava estado do mundo
+"Gerenciador de Recursos" --> "BD Gaia"
+"Módulo de Missões e Criaturas" --> "BD Gaia"
+@enduml
