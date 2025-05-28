@@ -1,0 +1,48 @@
+
+@startuml
+group Caca de criatura
+  Jogador -> Mundo : Caçar criatura
+  activate Mundo
+  note right of Mundo : Processar caça
+  Mundo -> IA : Enviar dados da caça
+  activate IA
+
+  Mundo --> Jogador : Retornar Drop
+  IA --> Mundo : Retonar novo calculo de drops e spawn
+  note right of IA : Validar caça e calcular nivel de interesse
+  deactivate IA
+
+  Mundo -> Mundo : Alterar drops e spawn da criatura
+  deactivate Mundo
+
+end
+
+IA -> NPC : Enviar novo valor de item
+activate NPC
+
+note right of NPC : Atualizar valores para venda e compra
+NPC --> IA : Retornar confirmação
+deactivate NPC
+
+group Venda de Item
+  Jogador -> NPC : Vender Item
+  activate NPC
+  note right of NPC : Processando venda
+  NPC --> Jogador : Concluir transação
+  NPC -> IA : Enviar dados
+  activate IA
+
+  note left of IA 
+    Processar venda e 
+    calcular oferta e procura 
+  end note
+
+  IA -> NPC : Enviar calculo
+  NPC --> IA : Retornar confirmaçao
+  deactivate IA
+  deactivate NPC
+  NPC -> NPC : Atualizar valores
+
+end
+
+@enduml
