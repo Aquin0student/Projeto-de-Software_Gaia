@@ -1,0 +1,45 @@
+@startuml
+package "Entidades" {
+  object Jogador
+  object NPC
+}
+
+package "Sistema"{
+  object IA
+  object BancoDeDados
+}
+
+package "Ambiente"{
+  object Mundo
+}
+
+
+Jogador --> NPC : Solicitação de Compra de Item
+NPC --> IA : Enviar dados da solicitação
+IA --> BancoDeDados : Validar dados do item
+BancoDeDados --> IA : Retornar dados do item
+IA --> Mundo : Atualizar dados do item
+
+note on link
+Atualiza a disponibilidade de itens no mundo
+end note
+
+IA --> BancoDeDados : Atualizar dados do item
+
+
+
+note left of Jogador
+  O jogador é quem inicia o processo
+end note
+
+note right of BancoDeDados
+  O Banco de Dados armazena os dados
+  calculados pela IA
+end note
+
+note right of Mundo
+  O Mundo é o ambiente que o jogador interage
+
+end note
+
+@enduml
