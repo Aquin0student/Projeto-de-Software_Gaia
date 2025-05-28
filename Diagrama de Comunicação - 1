@@ -26,7 +26,14 @@ end note
 
 IA --> BancoDeDados : Atualizar dados do item
 
+IA --> NPC : Retornar novos valores
 
+NPC --> Jogador : Vender Item
+
+note on link
+Essa interação acontece antes
+do envio da solicitação para a IA
+end note
 
 note left of Jogador
   O jogador é quem inicia o processo
@@ -39,7 +46,7 @@ end note
 
 note right of Mundo
   O Mundo é o ambiente que o jogador interage
-
 end note
 
+Mundo --> IA : Retornar resultado da alteração
 @enduml
