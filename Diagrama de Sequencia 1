@@ -1,52 +1,45 @@
-@startuml
-package "Entidades" {
-  object Jogador
-  object NPC
-}
+startuml
+NPC -> Jogador : Solicitação de Missão
+activate Jogador
+note right of Jogador: Executando a Missão
+Jogador --> NPC :  Concluir Missão
 
-package "Sistema"{
-  object IA
-  object BancoDeDados
-}
+opt Precisa de outro recurso acessível
+  NPC -> NPC : Coletar Recurso do Mundo
+  activate NPC
+  note right of NPC: Recolhendo
+  deactivate NPC
+end
 
-package "Ambiente"{
-  object Mundo
-}
+deactivate Jogador
 
+group Envio de item para a IA
+  NPC -> IA : Solicitar venda de item
+  activate IA
+  note right of IA: Pesquisando Oferta e Procura
 
-Jogador --> NPC : Solicitação de Compra de Item
-NPC --> IA : Enviar dados da solicitação
-IA --> BancoDeDados : Validar dados do item
-BancoDeDados --> IA : Retornar dados do item
-IA --> Mundo : Atualizar dados do item
+  IA --> NPC : Retornar Valor do item
+  
+deactivate IA
+end
 
-note on link
-Atualiza a disponibilidade de itens no mundo
-end note
+group Venda de Itens
+  NPC -> Jogador : Vender Item
+  activate Jogador
 
-IA --> BancoDeDados : Atualizar dados do item
+  Jogador --> NPC : Enviar Moeda
+  deactivate Jogador
 
-IA --> NPC : Retornar novos valores
+  NPC -> IA : Enviar dados da Venda
+  activate IA
+  note right of IA: Atualizando oferta e Procura
+  
+  IA ->> NPC : Retonar valor atualizado
+  deactivate IA
+end
 
-NPC --> Jogador : Vender Item
+IA -> IA : Atualizar Disponibilidade de Itens
+activate IA
+deactivate IA
 
-note on link
-Essa interação acontece antes
-do envio da solicitação para a IA
-end note
-
-note left of Jogador
-  O jogador é quem inicia o processo
-end note
-
-note right of BancoDeDados
-  O Banco de Dados armazena os dados
-  calculados pela IA
-end note
-
-note right of Mundo
-  O Mundo é o ambiente que o jogador interage
-end note
-
-Mundo --> IA : Retornar resultado da alteração
-@enduml
+@enduml 
