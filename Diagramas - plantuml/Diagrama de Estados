@@ -1,0 +1,25 @@
+@startuml
+[*] --> Início
+
+Início --> EscolhendoMissao : Inicia jogo
+EscolhendoMissao --> EmMissao : Aceita missão
+
+EmMissao --> ColetandoItem : Encontra item
+EmMissao --> DerrotandoInimigo : Encontra inimigo
+
+ColetandoItem --> InventarioAtualizado : Item coletado
+DerrotandoInimigo --> InventarioAtualizado : Inimigo derrotado \n+ drop de item
+
+InventarioAtualizado --> EmMissao : Continua missão
+InventarioAtualizado --> FinalMissao : Decide encerrar missão
+
+FinalMissao --> ProcurandoNPC : Decide vender itens
+ProcurandoNPC --> NegociandoComNPC : Encontra NPC
+
+NegociandoComNPC --> VendaEfetuada : NPC aceita item \n(preço regulado por IA)
+VendaEfetuada --> InventarioAtualizado : Remove item do inventário
+VendaEfetuada --> [*] : Fim do ciclo
+
+NegociandoComNPC --> [*] : Desiste da venda
+
+@enduml
